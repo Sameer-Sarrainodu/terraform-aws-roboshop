@@ -74,7 +74,7 @@ resource "aws_ami_from_instance" "main" {
  
 }
 
-resource "terraform_data" "main" {
+resource "terraform_data" "main_delete" {
   triggers_replace = [
     aws_instance.main.id
   ]
