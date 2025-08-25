@@ -58,7 +58,7 @@ resource "terraform_data" "main" {
 resource "aws_ec2_instance_state" "main" {
   instance_id = aws_instance.main.id
   state       = "stopped"
-  depends_on = ["terraform_data.main"]
+  depends_on = [terraform_data.main]
 }
 
 resource "aws_ami_from_instance" "main" {
@@ -134,7 +134,7 @@ resource "aws_autoscaling_group" "main" {
   desired_capacity   = 1
   max_size           = 10
   min_size           = 1
-  target_group_arns = ["aws_lb_target_group.main.arn"]
+  target_group_arns = [aws_lb_target_group.main.arn]
   vpc_zone_identifier  = local.private_subnet_ids
   health_check_grace_period = 300
   health_check_type         = "ELB"
@@ -191,7 +191,7 @@ resource "aws_lb_listener_rule" "main" {
 
   action {
     type             = "forward"
-    target_group_arn = "aws_lb_target_group.main.arn"
+    target_group_arn = aws_lb_target_group.main.arn
   }
 
   condition {
