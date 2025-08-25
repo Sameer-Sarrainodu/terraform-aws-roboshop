@@ -17,7 +17,7 @@ resource "aws_lb_target_group" "main" {
 
 resource "aws_instance" "main" {
   ami           = local.ami_id
-  instance_type = "t3.micro"
+  instance_type = "t2.micro"
   vpc_security_group_ids = [local.sg_id]
   subnet_id = local.private_subnet_id
   tags = merge(
@@ -92,7 +92,7 @@ resource "aws_launch_template" "main" {
 
   image_id = aws_ami_from_instance.main.id
   instance_initiated_shutdown_behavior = "terminate"
-  instance_type = "t3.micro"
+  instance_type = "t2.micro"
   vpc_security_group_ids = [local.sg_id]
   update_default_version = true # each time you update, new version will become default
   tag_specifications {
