@@ -5,9 +5,9 @@ locals {
     private_subnet_ids=split(",",data.aws_ssm_parameter.private_subnet_ids.value)
 
 
-    tg_port="${var.component}" =="frontend" ?80:8080
+    tg_port= "${var.component}" == "frontend" ? 80:8080
     healthcheck_path= "${var.component}" =="frontend" ? "/":"/health"
-    rule_header_url="${var.component}" =="frontend" ? "${var.environment}.${var.zone_name}" :"${var.component}.backend.${var.environment}.${var.zone_name}"
+    rule_header_url="${var.component}" =="frontend" ? "${var.environment}.${var.zone_name}" :"${var.component}.backend-${var.environment}.${var.zone_name}"
     alb_listner_arn="${var.component}" =="frontend" ? local.frontend_alb_listener_arn:local.backend_alb_listener_arn
 
 
